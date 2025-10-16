@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 
 export default function LogoClicker() {
   const [count, setCount] = useState(0);
   const [pulsing, setPulsing] = useState(false);
+  const [src, setSrc] = useState("/logo.png");
 
   const handleClick = () => {
     setCount((c) => c + 1);
@@ -21,7 +21,14 @@ export default function LogoClicker() {
         }`}
         onClick={handleClick}
       >
-        <Image src="/logo.png" alt="Base Logo" width={200} height={200} />
+        <img
+          src={src}
+          alt="Base Logo"
+          width={200}
+          height={200}
+          onError={() => setSrc("https://via.placeholder.com/200")}
+          className="object-contain"
+        />
       </div>
       <span className="text-xl font-medium">Clicks: {count}</span>
     </div>
